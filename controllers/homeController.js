@@ -1,20 +1,27 @@
+const { getAllByDate, getRecent } = require('../services/courseServise');
+
 const router = require('express').Router();
 
-router.get('/', (req, res) => {
+
+router.get('/', async (req, res) => {
+    let view;
+    let courses = [];
 
     if (req.user) {
         //user home page
-        res.render('user-home', {
-            title: 'Home Page',
-            user: req.user
-        })
+        view = 'user-home';
+        courses = await getAllByDate();
+
     } else {
         //guest home page
-        res.render('guest-home', {
-            title: 'Home Page'
-        })
-    }
+        view = 'guest-home';
+        courses = await getRecent();
 
+    }
+    res.render(view, {
+        title: 'Home Page',
+        courses
+    })
 });
 
 module.exports = router;
