@@ -1,5 +1,5 @@
 
-const { createCourse } = require('../services/courseServise');
+const { createCourse, getById } = require('../services/courseServise');
 const { parseError } = require('../util/parser');
 
 const router = require('express').Router();
@@ -7,7 +7,7 @@ const router = require('express').Router();
 router.get('/create', (req, res) => {
     res.render('create', {
         title: "Create Page"
-    })
+    });
 });
 
 router.post('/create', async (req, res) => {
@@ -29,8 +29,17 @@ router.post('/create', async (req, res) => {
             title: "Create Page",
             body: course,
             errors
-        })
+        });
     }
-})
+});
+
+router.get('/:id', async (req, res) => {
+    const course = await getById(req.params.id);
+
+    res.render('details', {
+        title: course.title,
+        body:course
+    });
+});
 
 module.exports = router;
