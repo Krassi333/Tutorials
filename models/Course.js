@@ -15,9 +15,10 @@ const courseSchema = new Schema({
             message: 'Invalid URL!'
         }
     },
-    duration: { type: String, required: [true,"Duration is required!"] },
+    duration: { type: String, required: [true, "Duration is required!"] },
     createdAt: { type: String, required: true, default: () => (new Date()).toISOString().slice(0, 10) }, //
     users: { type: [Types.ObjectId], ref: 'User', default: [] },
+    userCount: { type: Number, default: 0 },
     owner: { type: [Types.ObjectId], ref: 'User' }
 });
 
@@ -30,4 +31,4 @@ courseSchema.index({ title: 1 }, {    //ако ще има search на поле�
 
 const Course = model('Course', courseSchema);
 
-module.exports =Course ;
+module.exports = Course;
