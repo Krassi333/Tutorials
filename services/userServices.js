@@ -44,6 +44,8 @@ async function logout() {
 }
 
 function verifyToken(token) {
+    console.log(jwt.verify(token, secretWord));
+//{ iat: 1684341865 }
     return jwt.verify(token, secret);
 }
 
