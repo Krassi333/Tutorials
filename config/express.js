@@ -12,7 +12,9 @@ module.exports = (app) => {
     app.engine('.hbs', hbs.engine); //задава на app да ползва engine-a на handlebars
     app.set('view engine', '.hbs');
 
-    app.use('/static', express.static('static'));  // всички заявки към static ще достъпват папката static
+    app.use('/static', express.static('static'));
+    app.use('auth/static', express.static('static'));  // всички заявки към static ще достъпват папката static
+      // всички заявки към static ще достъпват папката static
     app.use(express.urlencoded({ extended: true }));
     app.use(cookieParser());  //добавя cookieParser като midlleware
     app.use(session());  //проверява дали текущата сесия е с активен потребител,т.е. дали има валидно cookie, ако няма го препраща към login 
