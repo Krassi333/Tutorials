@@ -31,7 +31,7 @@ router.post('/register', isGuest(),
             }
             //TODO check if register creates session 
             const token = await register(req.body.username, req.body.password);
-
+console.log('authController register token '+token);
             res.cookie('token', token);
 
             res.redirect('/');  //TODO replace with redirect by assignment
