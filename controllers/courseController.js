@@ -60,7 +60,7 @@ router.get('/:id/delete', async (req, res) => {
 
 router.get('/:id/edit', async (req, res) => {
     const course = await getById(req.params.id);
-    console.log(course._id);
+    //console.log(course._id);
     res.render('edit', {
         title: 'Edit course',
         body: course
